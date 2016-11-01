@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <cmath>
 
-#define WIDTH 80 //Ширина окна в пикселях
+#define WIDTH 78 //Ширина окна в пикселях
 #define HEIGHT 25 // Высота окна в пикселях
 
 
@@ -44,10 +44,14 @@ int main() {
 	*/
 	for (double curPos = start; curPos < end; curPos += step) { 
 		double value = function(curPos); //значение функции
-		int y = HEIGHT*(yMax/h) - roundf((value)* HEIGHT / h); // координата У в окне
-		int x = roundf((WIDTH * (curPos - start) / (end - start))); // координата Х в окне
 
-		if (y >= 0 && y < 25) {
+		//выводим таблиц значений
+		printf("f(%f)=%f\n",curPos,value);
+
+		int y = HEIGHT*(yMax/h) - floor((value)* HEIGHT / h); // координата У в окне
+		int x = floor((WIDTH * (curPos - start) / (end - start))); // координата Х в окне
+
+		if (y >= 0 && y < HEIGHT) {
 			matrix[y][x] = '+'; // заносим, в координатах (Х, У) есть точка
 		}
 	}
@@ -58,6 +62,7 @@ int main() {
 			char c = matrix[i][j];
 			putchar(c);
 		}
+		putchar('\n');//Новая строка
 	}
 
 	//Ждем нажатия клавиши и выходим
